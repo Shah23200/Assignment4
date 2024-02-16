@@ -1,0 +1,44 @@
+import random
+
+def interactive_pirate_loot_game(initial_bank):
+    # Items in the treasure chest with their corresponding values
+    treasure_chest = {
+        'Gems': 10,      # Value of +10
+        'Debloons': 50,  # Value of +50
+        'Coal': -10,     # Value of -10
+        'Dirt': -50      # Value of -50
+    }
+
+    bank_account = initial_bank  # Initial bank / loot stash
+
+    print("Welcome to the Pirate's Game of Chance")
+    print(f"Ye start with a bank account of {bank_account} coins.")
+    print("In ye chest, there be Gems, Debloons, Coal, and Dirt.")
+
+    while bank_account > 0:
+        # Prompt the user to grab from the chest
+        user_input = input("would ye like to grab something from the chest? (yes/no): ").lower()
+        if user_input == "yes":
+            item_chosen = random.choice(list(treasure_chest.keys()))
+            value = treasure_chest[item_chosen]
+            bank_account += value
+            if value > 0:
+                print(f"Ahoy me matey! Ye found {item_chosen} worth {value} coins.")
+            else:
+                print(f"Barnacles! Ye found {item_chosen}. That's {value} coins.")
+            print(f"Ye now have {bank_account} coins.")
+        elif user_input == "no":
+            print("Arr! Take yer winnings elsewhere")
+            break
+        else:
+            print("That's not a command ye scallywag!")
+
+        if bank_account <= 0:
+            print("Yer out of luck matey!")
+            break
+
+# Initial conditions
+initial_bank = 100  # Starting amount in the bank account
+
+# Run the game
+interactive_pirate_loot_game(initial_bank)
